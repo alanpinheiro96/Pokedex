@@ -9,7 +9,7 @@ public class Tipo
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public uint Id { get; set; }
+    public int Id { get; set; }
 
     [Required(ErrorMessageResourceName = "Informe o nome")]
     [StringLength(30, ErrorMessage = "O nome deve possuir no máximo 30 caracteres")]
@@ -19,4 +19,5 @@ public class Tipo
     [StringLength(25, ErrorMessage = "A Cor deve possuir no máximo 25 caracteres")]
     public string Cor { get; set; }
 
+    public ICollection<PokemonTipo> Pokemons { get; set; }
 }
