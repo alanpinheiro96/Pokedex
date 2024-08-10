@@ -3,3 +3,4 @@ git config --global user.email alantnt15@gmail.com
 
 dotnet new mvc -o Pokedex
 
+Instalar pacote do Entityframeworkcore e  SQL Server
