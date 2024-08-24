@@ -1,8 +1,8 @@
-
-CREATE DATABASE Pokedex;
+﻿CREATE DATABASE Pokedex;
 GO
+
 USE Pokedex;
-go
+GO
 
 CREATE TABLE Tipo (
 	Id	    INT NOT NULL IDENTITY,

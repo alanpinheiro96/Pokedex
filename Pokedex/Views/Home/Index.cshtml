@@ -1,5 +1,10 @@
-﻿@{
+﻿@model List<Pokedex.Models.Pokemon>
+@{
     ViewData["Title"] = "Home";
+    string BackgroundColor(string cor)
+    {
+        return cor.Replace("1)", "0.75)");
+    }
 }
 
 <div class="pt-5 container">
@@ -51,248 +56,31 @@
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
 
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color: rgba(119, 204, 85, 0.75)">
-                    <img src="img/pokemons/001.png" class="card-img-top" alt="Bulbasaur" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 001</h5>
-                        <h3 class="card-title text-dark">Bulbasaur</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white"
-                                    style="background-color:rgba(119, 204, 85, 1)">Planta</a>
-                                <a href="#" class="btn text-white" style="background-color:#a59">Venenoso</a>
+        @foreach (Pokemon pokemon in Model)
+        {
+            <!-- Card Pokemon - Inicio -->
+            <div class="col @string.Join(' ', pokemon.Tipos.Select(t => t.Tipo.Nome))">
+                <a asp-action="Details" asp-route-id="@pokemon.Numero"  class="text-decoration-none">
+                    <div class="card" style="background-color: @BackgroundColor(pokemon.Tipos.ToArray()[0].Tipo.Cor)">
+                        <img src="@pokemon.Imagem" class="card-img-top" alt="@pokemon.Nome" />
+                        <div class="card-body">
+                            <h5 class="card-text mb-1 text-white">Nº @pokemon.Numero.ToString("000")</h5>
+                            <h3 class="card-title text-dark">@pokemon.Nome</h3>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex gap-2 my-2">
+                                    @foreach (PokemonTipo tipo in pokemon.Tipos)
+                                    {
+                                        <a href="#" class="btn text-white"
+                                         style="background-color:@tipo.Tipo.Cor">@tipo.Tipo.Nome</a>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
-
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color:rgba(119, 204, 85, 0.75)">
-                    <img src="img/pokemons/002.png" class="card-img-top" alt="Ivysaur" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 002</h5>
-                        <h3 class="card-title text-dark">Ivysaur</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white" style="background-color:#7c5">Planta</a>
-                                <a href="#" class="btn text-white" style="background-color:#a59">Venenoso</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
-
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color:rgba(119, 204, 85, 0.75)">
-                    <img src="img/pokemons/003.png" class="card-img-top" alt="Venusaur" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 003</h5>
-                        <h3 class="card-title text-dark">Venusaur</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white" style="background-color:#7c5">Planta</a>
-                                <a href="#" class="btn text-white" style="background-color:#a59">Venenoso</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
-
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color:rgba(255, 68, 34, 0.75)">
-                    <img src="img/pokemons/004.png" class="card-img-top" alt="Charmander" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 004</h5>
-                        <h3 class="card-title text-dark">Charmander</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white"
-                                    style="background-color:rgba(255, 68, 34, 1)">Fogo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
-
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color:rgba(255, 68, 34, 0.75)">
-                    <img src="img/pokemons/005.png" class="card-img-top" alt="Charmeleon" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 005</h5>
-                        <h3 class="card-title text-dark">Charmeleon</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white"
-                                    style="background-color:rgba(255, 68, 34, 1)">Fogo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
-
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color:rgba(255, 68, 34, 0.75)">
-                    <img src="img/pokemons/006.png" class="card-img-top" alt="Charizard" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 006</h5>
-                        <h3 class="card-title text-dark">Charizard</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white"
-                                    style="background-color:rgba(255, 68, 34, 1)">Fogo</a>
-                                <a href="#" class="btn text-white"
-                                    style="background-color:rgba(136, 153, 255, 1)">Voador</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
-
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color:rgba(51, 153, 255, 0.75)">
-                    <img src="img/pokemons/007.png" class="card-img-top" alt="Squirtle" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 007</h5>
-                        <h3 class="card-title text-dark">Squirtle</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white"
-                                    style="background-color:rgba(51, 153, 255, 1)">Água</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
-
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color:rgba(51, 153, 255, 0.75)">
-                    <img src="img/pokemons/008.png" class="card-img-top" alt="Wartortle" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 008</h5>
-                        <h3 class="card-title text-dark">Wartortle</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white" style="background-color:#39f">Água</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
-
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color:rgba(51, 153, 255, 0.75)">
-                    <img src="img/pokemons/009.png" class="card-img-top" alt="Blastoise" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 009</h5>
-                        <h3 class="card-title text-dark">Blastoise</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white" style="background-color:#39f">Água</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
-
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color:rgba(170, 187, 102, 0.75)">
-                    <img src="img/pokemons/010.png" class="card-img-top" alt="Caterpie" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 010</h5>
-                        <h3 class="card-title text-dark">Caterpie</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white"
-                                    style="background-color:rgba(170, 187, 102, 1)">Inseto</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
-
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color:rgba(170, 187, 102, 0.75)">
-                    <img src="img/pokemons/011.png" class="card-img-top" alt="Metapod" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 011</h5>
-                        <h3 class="card-title text-dark">Metapod</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white"
-                                    style="background-color:rgba(170, 187, 102, 1)">Inseto</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
-
-        <!-- Card Pokemon - Inicio -->
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card" style="background-color:rgba(170, 187, 102, 0.75)">
-                    <img src="img/pokemons/012.png" class="card-img-top" alt="Butterfree" />
-                    <div class="card-body">
-                        <h5 class="card-text mb-1 text-white">Nº 012</h5>
-                        <h3 class="card-title text-dark">Butterfree</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex gap-2 my-2">
-                                <a href="#" class="btn text-white"
-                                    style="background-color:rgba(170, 187, 102, 1)">Inseto</a>
-                                <a href="#" class="btn text-white"
-                                    style="background-color:rgba(136, 153, 255, 1)">Voador</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Card Pokemon - Fim -->
+                </a>
+            </div>
+            <!-- Card Pokemon - Fim -->
+        }
 
         <div id="zeroPokemon" class="col-lg-12 text-center" hidden>
             <h1 class="my-3 text-danger">Nenhum Pokemon Encontrado</h1>

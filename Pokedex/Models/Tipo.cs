@@ -4,18 +4,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Pokedex.Models;
 
 [Table("Tipo")]
-
 public class Tipo
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-    [Required(ErrorMessageResourceName = "Informe o nome")]
+    [Required(ErrorMessage = "Informe o nome")]
     [StringLength(30, ErrorMessage = "O nome deve possuir no máximo 30 caracteres")]
     public string Nome { get; set; }
 
-    [Required(ErrorMessageResourceName = "Informe a Cor")]
+    [Required(ErrorMessage = "Informe a cor")]
     [StringLength(25, ErrorMessage = "A Cor deve possuir no máximo 25 caracteres")]
     public string Cor { get; set; }
 

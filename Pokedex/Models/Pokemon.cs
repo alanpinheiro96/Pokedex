@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Pokedex.Models;
 
 [Table("Pokemon")]
-
 public class Pokemon
 {
     [Key]
@@ -14,7 +13,7 @@ public class Pokemon
     [Required]
     public int RegiaoId { get; set; }
     [ForeignKey("RegiaoId")]
-    public Regiao Regiao { get; set; }   //Propriedade de navegação 
+    public Regiao Regiao { get; set; }
 
     [Required]
     public int GeneroId { get; set; }
@@ -22,13 +21,13 @@ public class Pokemon
     public Genero Genero { get; set; }
 
     [Required(ErrorMessage = "Informe o Nome")]
-    [StringLength(30, ErrorMessage = "O Nome deve possuir até 30 caracteres")]
+    [StringLength(30, ErrorMessage = "O Nome deve possuir no máximo 30 caracteres")]
     public string Nome { get; set; }
 
     [StringLength(1000)]
     public string Descricao { get; set; }
 
-    [Required(ErrorMessage = "Informe a altura")]
+    [Required]
     [Column(TypeName = "decimal(5,2)")]
     public decimal Altura { get; set; }
 
@@ -41,7 +40,6 @@ public class Pokemon
 
     [StringLength(400)]
     public string Animacao { get; set; }
-
 
     public ICollection<PokemonTipo> Tipos { get; set; }
 

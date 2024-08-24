@@ -5,9 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 string conexao = builder.Configuration.GetConnectionString("Conexao");
-builder.Services.AddDbContext<AppDbContext>
-(
-    options => options.UseSqlServer(conexao)
+var versao = ServerVersion.AutoDetect(conexao);
+builder.Services.AddDbContext<AppDbContext>(
+    options => options.UseMySql(conexao, versao)
 );
 
 builder.Services.AddControllersWithViews();
