@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pokedex.Data;
 using Pokedex.Models;
 using Microsoft.EntityFrameworkCore;
+using Pokedex.ViewModels;
 
 namespace Pokedex.Controllers;
 
@@ -20,11 +21,31 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        List<Pokemon> pokemons = _context.Pokemons
+        HomeVM home = new()
+        {
+            Tipos = _context.Tipos.ToList(),
+            Pokemons = _context.Pokemons
             .Include(p => p.Tipos)
             .ThenInclude(pt => pt.Tipo)
-            .ToList();
-        return View(pokemons);
+            .ToList()
+        };
+        return View(home);
+    }
+
+    public IActionResult Details(int id)
+    {
+        Pokemon pokemon = _context.Pokemons
+            .Where(p => p.Numero == id)
+            .Include(p => p.Tipos)
+            .ThenInclude(pt => pt.Tipo)
+            .Include(p => p.Regiao)
+            .Include(p => p.Genero)
+            .SingleOrDefault();
+        DetailsVM details = new()
+        {
+            Atual = pokemon,
+        };
+        return View(pokemon);
     }
 
     public IActionResult Privacy()
